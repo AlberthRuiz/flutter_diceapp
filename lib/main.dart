@@ -15,12 +15,17 @@ class DiceApp extends StatefulWidget {
 
 class _DiceApp extends State<DiceApp> {
   int leftDice = 1, rightDice = 1;
+  @override
+  void initState() {
+    leftDice = Random().nextInt(6) + 1;
+    rightDice = Random().nextInt(6) + 1;
+    super.initState();
+  }
 
   void ramdomDice() {
-    setState(() {
-      leftDice = Random().nextInt(6) + 1;
-      rightDice = Random().nextInt(6) + 1;
-    });
+    leftDice = Random().nextInt(6) + 1;
+    rightDice = Random().nextInt(6) + 1;
+    setState(() {});
   }
 
   @override
