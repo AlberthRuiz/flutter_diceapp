@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,18 +8,60 @@ void main() {
   ));
 }
 
-class DiceApp extends StatelessWidget {
+class DiceApp extends StatefulWidget {
+  @override
+  _DiceApp createState() => _DiceApp();
+}
+
+class _DiceApp extends State<DiceApp> {
+  int leftDice = 1, rightDice = 1;
+
+  void ramdomDice() {
+    setState(() {
+      leftDice = Random().nextInt(6) + 1;
+      rightDice = Random().nextInt(6) + 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.deepPurple,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "DiceApp",
           style: TextStyle(color: Colors.white, fontSize: 20),
         ),
         backgroundColor: Colors.deepPurple,
         elevation: 10,
         centerTitle: true,
+      ),
+      body: Center(
+        child: Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: TextButton(
+                  onPressed: () {
+                    ramdomDice();
+                  },
+                  child: Image.asset(
+                    'assets/images/dice$leftDice.png',
+                  )),
+            ),
+            Expanded(
+              flex: 1,
+              child: TextButton(
+                onPressed: () {
+                  ramdomDice();
+                },
+                child: Image.asset(
+                  'assets/images/dice$rightDice.png',
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
